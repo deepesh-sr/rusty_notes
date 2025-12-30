@@ -1,3 +1,5 @@
+mod closure;
+use closure::*;
 fn main() {
-    println!("Hello, world!");
+
 }
