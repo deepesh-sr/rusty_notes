@@ -41,8 +41,25 @@ impl Inventory {
     // Color could be some or none. 
     pub fn giveaway(&self, user_preference : Option<ShirtColor>)-> ShirtColor {
 
-        user_preference.unwrap_or_else(|| self.most_stocked())// closure , a anonymous function that has captured a value , here Shirt.
-    }
+        user_preference.unwrap_or_else(|| self.most_stocked())
+        // closure , a anonymous function that has captured a value , here Shirt.
+        // unwrap_or_else method , if user preference is Some(), value inside some is returned. 
+        // if the value is None, closure without any parameter is called and the value is returned , the value returned by the closure.
+
+        // you might wonder why not - 
+            // unwrap_or(self.most_stocked()) but this will call it immediately , even if we provide value Some. 
+            // whereares unwrap_or_else( ) it expects a closure. 
+
+//*---------------------------------Rewriting the same in function----------------------- */
+        // user_preference.unwrap_or_else(fallback_most_stocked()) // won't work beacuse unrwap_or_else expect closures.
+        // if you are gonna call that too still , you have to 
+        // user_preference.unwrap_or_else(|| fallback_most_stocked(self)) , are we again used closure :), we still need closure to capture self here. 
+        
+        }
+    // pub fn fallback_most_stocked(inv : &Inventory)-> ShirtColor{
+    //     inv.most_stocked()
+    // }
+
     pub fn most_stocked(&self) -> ShirtColor { 
 
         // calculating the color count on tshirt. 
